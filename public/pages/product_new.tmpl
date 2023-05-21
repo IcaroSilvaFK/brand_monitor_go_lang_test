@@ -42,8 +42,14 @@
 
       <div>
         <div class="form__col">
-          <label for="description">Descrição</label>
-          <textarea id="description" name="description" placeholder="Descrição do produto"></textarea>
+          <header>
+            <label for="description">Descrição</label>
+            <span>
+              <span id="description_length">0</span>
+              /250
+            </span>
+          </header>
+          <textarea id="description" name="description" placeholder="Descrição do produto" maxlength="250"></textarea>
         </div>
       </div>
 
@@ -66,7 +72,8 @@
   <script>
     const toast = document.querySelector(".toast")
     const form = document.querySelector("form");
-
+    const description = document.querySelector("#description");
+    const descriptionLength = document.querySelector("#description_length")
 
     form.addEventListener("submit", async e => {
       e.preventDefault()
@@ -84,6 +91,28 @@
         toast.style.display = "none"
       }, 1000)
     })
+
+    description.addEventListener("input", e => {
+      const value = e.target.value.length
+
+      descriptionLength.innerHTML = value
+
+      changeColorOnDescriptionLength(value)
+
+    })
+
+    function changeColorOnDescriptionLength(length) {
+      if (length < 200) {
+        descriptionLength.style.color = "#00875f"
+      }
+      if (length >= 200) {
+        descriptionLength.style.color = "#F6E05E"
+      }
+
+      if (length >= 250) {
+        descriptionLength.style.color = "#f75a78"
+      }
+    }
   </script>
 </body>
 

@@ -64,6 +64,12 @@
         }
       }
 
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
       textarea {
         resize: none;
         height: 120px;

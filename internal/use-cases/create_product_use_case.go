@@ -77,7 +77,6 @@ func (pdr *CreateProductUseCase) Execute(
 		}
 	}()
 
-	fmt.Println("Já passow")
 	if err != nil {
 		fmt.Println("Error on consume queue:", err.Error())
 	}

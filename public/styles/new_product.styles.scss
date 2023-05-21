@@ -12,7 +12,7 @@
     margin: auto;
   }
 
-  header {
+  > header {
     color: $violet7;
     font-size: 1.375rem;
     margin-bottom: 12px;
@@ -41,6 +41,7 @@
       flex-direction: column;
       flex: 1;
       gap: 4px;
+      margin-top: 12px;
 
       label {
         font-size: 0.875rem;
@@ -59,6 +60,17 @@
         &[type="number"]::-webkit-inner-spin-button {
           -webkit-appearance: none;
           margin: 0;
+        }
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        span {
+          font-size: 0.875rem;
+          color: $gray6;
         }
       }
 

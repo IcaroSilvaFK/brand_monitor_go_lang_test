@@ -14,3 +14,13 @@ func TestShouldSendEmail(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+func TestShouldSendEmailOnCreateProduct(t *testing.T) {
+
+	client := smtp.NewSMTPClient()
+
+	err := client.SendNewProductAdded("icaro@icaro.com")
+
+	assert.Nil(t, err)
+
+}

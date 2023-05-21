@@ -60,9 +60,13 @@
       </div>
 
       <div class="form__col">
-        <label for="description">Preço</label>
+        <header>
+          <label for="description">Descrição</label>
+          <span><span id="description_length">0</span>/250</span>
+        </header>
         <textarea name="description" id="description" name="description" value="{{ .product.Description }}"
-          placeholder="{{.product.Description}}"></textarea>
+          placeholder="Descrição do produto" maxlength="250">
+        {{ .product.Description }}</textarea>
       </div>
       <footer>
         <button type="submit">Salvar</button>
@@ -82,19 +86,33 @@
     const inputFile = document.getElementById("image")
     const form = document.querySelector("form")
     const productId = "{{ .product.ID }}"
+    const descriptionInput = document.getElementById("description")
+    const descriptionLength = document.getElementById("description_length")
+    const productImage = document.getElementById("product_image")
+    const defaultLengthFromColor = descriptionInput.textContent.length
 
+
+    verifyDefaultColorFromLengthDescription(defaultLengthFromColor)
+    trimSpaceOnDefaultDescriptionAndAddDefaultLength()
 
     inputFile.addEventListener("change", e => {
       const targetFile = e.target.files[0]
 
       const reader = new FileReader()
 
+      productImage.alt = targetFile.name
+
       reader.onload = () => {
-        document.getElementById("product_image").src = reader.result
+        productImage.src = reader.result
       }
-
-
       reader.readAsDataURL(targetFile)
+    })
+
+    descriptionInput.addEventListener('input', e => {
+      const value = e.target.value.length
+      descriptionLength.innerText = value
+
+      verifyDefaultColorFromLengthDescription(value)
     })
 
     form.addEventListener('submit', async e => {
@@ -107,13 +125,26 @@
         body: formData
       })
 
-
       toast.style.display = "block"
-
-
       window.location.href = "/products"
-
     })
+
+    function verifyDefaultColorFromLengthDescription(length) {
+      if (length < 200) {
+        descriptionLength.style.color = "#00875f"
+      }
+      if (length >= 200) {
+        descriptionLength.style.color = "#F6E05E"
+      }
+      if (length >= 250) {
+        descriptionLength.style.color = "#f75a78"
+      }
+    }
+
+    function trimSpaceOnDefaultDescriptionAndAddDefaultLength() {
+      descriptionInput.innerText = descriptionInput.innerHTML.trim()
+      descriptionLength.innerText = "{{.product.Description}}".length
+    }
   </script>
 </body>
 
