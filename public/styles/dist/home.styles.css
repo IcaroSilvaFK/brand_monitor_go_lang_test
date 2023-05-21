@@ -1,4 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100&display=swap");
+@keyframes toast {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes spring {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 .card {
   border-radius: 0.25rem;
   overflow: hidden;
@@ -8,6 +28,7 @@
   height: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 12px;
+  animation: spring 0.4s linear;
 }
 .card .card__image {
   flex: 1;

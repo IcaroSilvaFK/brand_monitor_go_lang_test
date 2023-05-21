@@ -19,6 +19,7 @@ html {
   font-size: 1rem;
   background: $white;
   color: $gray1;
+  overflow-x: hidden;
 
   display: flex;
   flex-direction: column;

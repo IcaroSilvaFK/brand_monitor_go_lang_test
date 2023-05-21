@@ -71,7 +71,14 @@
   </main>
   {{ template "footer.tmpl"}}
 
-  <script defer>
+  <div class="toast" style="display: none;">
+    <div class="toast__content">
+      <span>Produto atualizado com sucesso</span>
+    </div>
+  </div>
+
+  <script>
+    const toast = document.querySelector(".toast")
     const inputFile = document.getElementById("image")
     const form = document.querySelector("form")
     const productId = "{{ .product.ID }}"
@@ -99,7 +106,12 @@
         method: 'PUT',
         body: formData
       })
-      // window.location.href = "/products"
+
+
+      toast.style.display = "block"
+
+
+      window.location.href = "/products"
 
     })
   </script>

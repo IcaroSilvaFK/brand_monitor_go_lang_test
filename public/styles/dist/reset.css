@@ -17,6 +17,7 @@ html {
   font-size: 1rem;
   background: #ffff;
   color: #121214;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
 }

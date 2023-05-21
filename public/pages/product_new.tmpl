@@ -57,7 +57,14 @@
 
   {{ template "footer.tmpl" }}
 
+  <div class="toast" style="display: none;">
+    <div class="toast__content">
+      <span>Produto adicionado com sucesso</span>
+    </div>
+  </div>
+
   <script>
+    const toast = document.querySelector(".toast")
     const form = document.querySelector("form");
 
 
@@ -71,6 +78,11 @@
         body: formData
       })
       form.reset()
+
+      toast.style.display = "block"
+      setTimeout(() => {
+        toast.style.display = "none"
+      }, 1000)
     })
   </script>
 </body>

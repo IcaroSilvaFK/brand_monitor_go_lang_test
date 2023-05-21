@@ -1,4 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100&display=swap");
+@keyframes toast {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .container__main {
   max-width: 800px;
   width: 100%;
@@ -78,4 +88,16 @@
 }
 .container__main form footer button:hover {
   background: #7c3aed;
+}
+
+.toast {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  background-color: #00875f;
+  color: #ffff;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: toast 0.4s linear;
 }
