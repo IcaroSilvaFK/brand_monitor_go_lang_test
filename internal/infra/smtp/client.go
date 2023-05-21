@@ -2,7 +2,6 @@ package smtp
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -100,8 +99,6 @@ func (client *SMTClient) SendNewProductAdded(to string) error {
 	}
 
 	m := mail.NewMessage()
-
-	fmt.Println(body)
 
 	m.SetHeader("From", client.from)
 	m.SetHeader("To", to)

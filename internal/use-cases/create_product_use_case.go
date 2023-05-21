@@ -4,13 +4,13 @@ import (
 	"context"
 	"fmt"
 	"mime/multipart"
-	"sync"
+	"time"
 
 	"github.com/IcaroSilvaFK/brand_monitor_go_lang_test/internal/entities"
 	"github.com/IcaroSilvaFK/brand_monitor_go_lang_test/internal/infra/configs"
 	"github.com/IcaroSilvaFK/brand_monitor_go_lang_test/internal/infra/database"
+	"github.com/IcaroSilvaFK/brand_monitor_go_lang_test/internal/infra/queues"
 	"github.com/IcaroSilvaFK/brand_monitor_go_lang_test/internal/infra/repositories"
-	"github.com/IcaroSilvaFK/brand_monitor_go_lang_test/internal/infra/smtp"
 	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 )
 
@@ -65,23 +65,30 @@ func (pdr *CreateProductUseCase) Execute(
 		return nil, err
 	}
 
-	var wg sync.WaitGroup
+	queueConnection := queues.NewSendEmailQueue()
 
-	wg.Add(1)
+	taskQueue, _ := queueConnection.OpenQueue("send_order_emails")
+	err = taskQueue.StartConsuming(10, time.Second)
+
 	go func() {
 		users, _ := findAllUsersUseCase.Execute()
-		client := smtp.NewSMTPClient()
-
-		defer wg.Done()
-
 		for _, u := range users {
-			fmt.Println(u.Email)
-			client.SendNewProductAdded(u.Email)
+			taskQueue.Publish(u.Email)
 		}
-
 	}()
 
-	wg.Wait()
+	fmt.Println("Já passow")
+	if err != nil {
+		fmt.Println("Error on consume queue:", err.Error())
+	}
+
+	sendEmailConsumer := queues.NewSendAllEmailsQueue()
+
+	_, err = taskQueue.AddConsumer("send_order_emails", sendEmailConsumer)
+
+	if err != nil {
+		fmt.Println("Error on consume queue:", err.Error())
+	}
 
 	return p, nil
 }
