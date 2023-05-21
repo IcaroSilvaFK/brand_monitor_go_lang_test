@@ -10,7 +10,6 @@ require (
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/google/uuid v1.3.0
 	github.com/joho/godotenv v1.5.1
-	github.com/keithwachira/go-taskq v0.0.0-20230119170049-8f03fdb8ef45
 	github.com/stretchr/testify v1.8.1
 	golang.org/x/crypto v0.5.0
 	gorm.io/driver/mysql v1.5.1
