@@ -40,11 +40,12 @@
       <div>
         <div class="form__col">
           <label for="name">Nome do produto</label>
-          <input type="text" id="name" name="name" value="{{ .product.Name }}">
+          <input type="text" id="name" name="name" placeholder="Digite o nome do produto" value="{{ .product.Name }}">
         </div>
         <div class="form__col">
           <label for="price">Preço</label>
-          <input type="number" id="price" name="price" value="{{ .product.Price }}">
+          <input type="number" id="price" name="price" placeholder="Digite o valor do produto"
+            value="{{ .product.Price }}">
         </div>
       </div>
       <div>
@@ -55,7 +56,8 @@
         </div>
         <div class="form__col">
           <label for="quantity">Quantidade</label>
-          <input type="number" id="quantity" name="quantity" value="{{ .product.Price }}">
+          <input type="number" id="quantity" name="quantity" placeholder="Digite a quantidade do produto"
+            value="{{ .product.Quantity }}">
         </div>
       </div>
 
@@ -75,14 +77,22 @@
   </main>
   {{ template "footer.tmpl"}}
 
-  <div class="toast" style="display: none;">
+  <div class="toast" id="success" style="display: none;">
     <div class="toast__content">
       <span>Produto atualizado com sucesso</span>
     </div>
   </div>
 
+
+  <div class="toast" id="loading" style="display: none;">
+    <div class="toast__content">
+      <span>Carregando...</span>
+    </div>
+  </div>
+
   <script>
-    const toast = document.querySelector(".toast")
+    const toastSuccess = document.getElementById("success")
+    const toastLoading = document.getElementById("loading")
     const inputFile = document.getElementById("image")
     const form = document.querySelector("form")
     const productId = "{{ .product.ID }}"
@@ -118,6 +128,9 @@
     form.addEventListener('submit', async e => {
       e.preventDefault()
 
+      toastLoading.style.display = "block"
+      toastLoading.style.background = "#F6E05E";
+
       const url = `/products/${productId}`
       const formData = new FormData(form)
       await fetch(url, {
@@ -125,7 +138,7 @@
         body: formData
       })
 
-      toast.style.display = "block"
+      toastSuccess.style.display = "block"
       window.location.href = "/products"
     })
 

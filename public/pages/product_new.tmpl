@@ -54,7 +54,7 @@
       </div>
 
       <footer>
-        <button>
+        <button type="submit">
           Adicionar
         </button>
       </footer>
@@ -63,32 +63,48 @@
 
   {{ template "footer.tmpl" }}
 
-  <div class="toast" style="display: none;">
+  <div class="toast" id="success" style="display: none;">
     <div class="toast__content">
       <span>Produto adicionado com sucesso</span>
     </div>
   </div>
 
+  <div class="toast" id="loading" style="display: none;">
+    <div class="toast__content">
+      <span>Carregando...</span>
+    </div>
+  </div>
+
+
   <script>
-    const toast = document.querySelector(".toast")
+    const toastSuccess = document.getElementById("success")
+    const toastLoading = document.getElementById("loading")
     const form = document.querySelector("form");
     const description = document.querySelector("#description");
     const descriptionLength = document.querySelector("#description_length")
+    const buttonSubmitCreateNewProductForm = document.querySelector('button[type=submit]')
 
     form.addEventListener("submit", async e => {
       e.preventDefault()
 
+
       const formData = new FormData(form)
+
+      buttonSubmitCreateNewProductForm.setAttribute('disabled', true)
+
+      toastLoading.style.display = "block";
+      toastLoading.style.background = "#F6E05E";
 
       await fetch("/products", {
         method: "POST",
         body: formData
       })
+      toastLoading.style.display = "none";
       form.reset()
 
-      toast.style.display = "block"
+      toastSuccess.style.display = "block"
       setTimeout(() => {
-        toast.style.display = "none"
+        toastSuccess.style.display = "none"
       }, 1000)
     })
 
