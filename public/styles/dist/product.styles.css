@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100&display=swap");
+.container__main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 22px auto;
+}
+.container__main header nav ul {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.container__main header nav ul li a {
+  text-decoration: none;
+  color: #6d28d9;
+}
+.container__main header nav ul li a:hover {
+  text-decoration: underline;
+}
+.container__main header nav ul li {
+  color: #8d8d99;
+}
+.container__main section {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin-top: 22px;
+}
+.container__main section .product__image img {
+  width: 450px;
+  height: 450px;
+  object-fit: contain;
+}
+.container__main section .product__details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.container__main section .product__details header h3 {
+  color: #6d28d9;
+  font-size: 2rem;
+}
+.container__main section .product__details div {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.container__main section .product__details div p {
+  color: #8d8d99;
+}
+.container__main section .product__details div span {
+  color: #7c3aed;
+}
+.container__main section .product__details footer button {
+  background-color: #7c3aed;
+  color: #ffff;
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 0.25rem;
+}

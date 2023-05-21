@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/dist/reset.css">
+  <link rel="stylesheet" href="/styles/dist/edit_product.styles.css">
+
+  <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+  <title>Document</title>
+</head>
+
+<body>
+  {{template "header.tmpl" }}
+
+  <main class="container__main">
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a href="/products">
+              Home
+              <i class="ph-fill ph-house"></i>
+            </a>
+          </li>
+          <li>
+            <i class="ph-fill ph-caret-right"></i>
+          </li>
+          <li>
+            editar produto <i class="ph-fill ph-pencil-line"></i>
+          </li>
+        </ul>
+      </nav>
+      <h3>Editar Produto</h3>
+    </header>
+
+    <form action="">
+      <div>
+        <div class="form__col">
+          <label for="name">Nome do produto</label>
+          <input type="text" id="name" name="name" value="{{ .product.Name }}">
+        </div>
+        <div class="form__col">
+          <label for="price">Preço</label>
+          <input type="number" id="price" name="price" value="{{ .product.Price }}">
+        </div>
+      </div>
+      <div>
+        <div class="form__input_file">
+          <label for="image">Imagem</label>
+          <img src="{{.product.ImageURL}}" id="product_image" />
+          <input type="file" id="image" name="image" value="{{ .product.ImageURL }}" onchange="">
+        </div>
+        <div class="form__col">
+          <label for="quantity">Quantidade</label>
+          <input type="number" id="quantity" name="quantity" value="{{ .product.Price }}">
+        </div>
+      </div>
+
+      <div class="form__col">
+        <label for="description">Preço</label>
+        <textarea name="description" id="description" name="description" value="{{ .product.Description }}"
+          placeholder="{{.product.Description}}"></textarea>
+      </div>
+      <footer>
+        <button type="submit">Salvar</button>
+      </footer>
+    </form>
+  </main>
+  {{ template "footer.tmpl"}}
+
+  <script defer>
+    const inputFile = document.getElementById("image")
+    const form = document.querySelector("form")
+    const productId = "{{ .product.ID }}"
+
+
+    inputFile.addEventListener("change", e => {
+      const targetFile = e.target.files[0]
+
+      const reader = new FileReader()
+
+      reader.onload = () => {
+        document.getElementById("product_image").src = reader.result
+      }
+
+
+      reader.readAsDataURL(targetFile)
+    })
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault()
+
+      const url = `/products/${productId}`
+      const formData = new FormData(form)
+      await fetch(url, {
+        method: 'PUT',
+        body: formData
+      })
+      // window.location.href = "/products"
+
+    })
+  </script>
+</body>
+
+</html>

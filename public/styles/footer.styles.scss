@@ -1,0 +1,15 @@
+@import "./variables";
+
+.container__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px;
+
+  span {
+    font-size: 0.875rem;
+    font-style: italic;
+    color: $gray1;
+  }
+}

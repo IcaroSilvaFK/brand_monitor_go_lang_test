@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/dist/reset.css">
+  <link rel="stylesheet" href="/styles/dist/product.styles.css">
+  <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+  <title>BRANDSTORE {{ .title }}</title>
+</head>
+
+<body>
+  {{ template "header.tmpl"}}
+
+  <main class="container__main">
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a href="/products">
+              Home
+              <i class="ph-fill ph-house"></i>
+            </a>
+          </li>
+          <li>
+            <i class="ph-fill ph-caret-right"></i>
+          </li>
+          <li>
+            {{ .title }}
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section>
+      <div class="product__image">
+        <img src={{ .product.ImageURL }} alt={{ .product.Name }}>
+      </div>
+      <div class="product__details">
+        <header>
+          <h3>{{ .product.Name }}</h>
+        </header>
+        <div>
+          <p>{{ .product.Description }}</p>
+
+          <span id="price">{{ .product.Price }}</span>
+        </div>
+
+        <footer>
+          <button>Comprar</button>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+
+  {{ template "footer.tmpl"}}
+
+  <script>
+    function formatCurrency() {
+
+      const price = document.querySelector('#price')
+
+      const parseDecimal = parseInt(price.innerHTML)
+      price.innerHTML = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+
+      }).format(parseDecimal / 100)
+    }
+
+    formatCurrency()
+  </script>
+</body>
+
+</html>

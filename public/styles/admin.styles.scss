@@ -1,0 +1,99 @@
+@import "variables";
+
+.container__main {
+  max-width: 1200px;
+  width: 100%;
+  margin: 22px auto;
+  flex: 1;
+
+  .main__header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    a {
+      background: $violet7;
+      color: $white;
+
+      font-weight: bold;
+      font-size: 0.875rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: $radii;
+
+      padding: 6px 16px;
+
+      &:hover {
+        background: $violet6;
+      }
+    }
+  }
+
+  .main__table {
+    width: 100%;
+    margin-top: 18px;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: $radii;
+      overflow: hidden;
+
+      thead {
+        background: $gray7;
+        th {
+          padding: 6px;
+        }
+
+        @media screen and (max-width: 500px) {
+          th:nth-child(2),
+          th:nth-child(4) {
+            display: none;
+          }
+        }
+      }
+
+      tbody {
+        tr:nth-child(even) {
+          background: $gray7;
+        }
+        tr td {
+          text-align: center;
+          padding: 6px 0;
+          img {
+            width: 80px;
+            object-fit: cover;
+          }
+
+          div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            button,
+            a {
+              background: transparent;
+              font-size: 1.375rem;
+              &:first-child {
+                color: $red;
+              }
+            }
+            a {
+              color: $darkGreen;
+            }
+          }
+        }
+
+        @media screen and (max-width: 500px) {
+          td:nth-child(2),
+          td:nth-child(4) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100&display=swap");
+.container__main {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 22px auto;
+}
+.container__main header nav ul {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.container__main header nav ul li {
+  color: #c4c4cc;
+}
+.container__main header nav ul li a {
+  color: #6d28d9;
+}
+.container__main header nav ul li a:hover {
+  text-decoration: underline;
+}
+.container__main header h3 {
+  margin-top: 12px;
+}
+.container__main form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+  gap: 12px;
+}
+.container__main form > div {
+  display: flex;
+  gap: 40px;
+}
+.container__main form .form__col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.container__main form .form__col label {
+  font-weight: bold;
+}
+.container__main form .form__col input {
+  border: 1px solid #c4c4cc;
+  padding: 8px 4px;
+  border-radius: 0.375rem;
+  font-family: "Poppins", sans-serif;
+}
+.container__main form .form__col input[type=number]::-webkit-outer-spin-button, .container__main form .form__col input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.container__main form .form__col textarea {
+  resize: none;
+  height: 120px;
+  padding: 4px;
+  font-family: "Poppins", sans-serif;
+  border-radius: 0.25rem;
+  color: #121214;
+  border: 1px solid #c4c4cc;
+}
+.container__main form .form__input_file {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.container__main form .form__input_file img {
+  max-width: 350px;
+  max-height: 100px;
+  object-fit: contain;
+}
+.container__main form footer {
+  display: flex;
+  justify-content: flex-start;
+}
+.container__main form footer button {
+  padding: 10px 26px;
+  background: #7c3aed;
+  color: #ffff;
+  font-weight: bold;
+  border-radius: 0.25rem;
+}

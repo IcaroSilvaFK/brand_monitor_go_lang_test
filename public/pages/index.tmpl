@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/dist/reset.css">
+  <link rel="stylesheet" href="/styles/dist/home.styles.css">
+  <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+  <title>Document</title>
+</head>
+
+<body>
+  {{template "header.tmpl" }}
+  <main class="container__main">
+    <section class="main__form">
+      <form>
+        <input placeholder="Busque aqui" id="filter" />
+        <div>
+          <button type="submit">Buscar</button>
+          <button type="button" onclick="handleClearFilter()">Limpar</butto>
+        </div>
+      </form>
+    </section>
+    <section class=" main__products">
+      {{ range .products }}
+      <div class="card">
+        <div class="card__image">
+          <img src={{ .ImageURL }} alt={{ .Name }} />
+        </div>
+        <div>
+          <strong>{{.Name}}</strong>
+
+          <p>
+            {{ .Description }}
+          </p>
+          <span id="price">
+            {{ .Price }}
+          </span>
+        </div>
+        <footer>
+          <a href="/products/{{ .ID }}">
+            Ver mais <i class="ph-fill ph-caret-right"></i>
+          </a>
+        </footer>
+      </div>
+      {{ end }}
+
+    </section>
+  </main>
+  {{ template "footer.tmpl" }}
+
+  <script>
+    const allPrice = document.querySelectorAll("#price")
+    const form = document.querySelector("form")
+    const inputFilter = document.querySelector("#filter")
+
+    function formatCurrency() {
+
+      allPrice.forEach(price => {
+
+        const convertPriceToNumber = parseFloat(price.innerHTML)
+        const convertToCents = convertPriceToNumber / 100
+
+        price.innerHTML = new Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        }).format(convertToCents)
+
+      })
+
+      return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      })
+    }
+
+    function handleClearFilter() {
+      inputFilter.value = ""
+      window.location.replace(`/products`)
+    }
+
+    form.addEventListener("submit", e => {
+      e.preventDefault()
+
+      window.location.replace(`/products?query=${inputFilter.value}`)
+    })
+
+    formatCurrency()
+  </script>
+</body>
+
+</html>

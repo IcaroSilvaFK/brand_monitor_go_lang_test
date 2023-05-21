@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/IcaroSilvaFK/brand_monitor_go_lang_test/internal/infra/database"
 	"github.com/IcaroSilvaFK/brand_monitor_go_lang_test/internal/routes"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -14,14 +15,19 @@ func main() {
 		log.Fatal("Error in load .env file")
 	}
 
-	r := gin.Default()
-	// html := template.Must(template.New("index.html").ParseFiles("./public/index.html"))
+	database.NewDatabaseConnection()
 
-	r.LoadHTMLGlob("./public/*")
+	r := gin.Default()
+
+	r.Static("/styles", "./public/styles")
+	r.LoadHTMLGlob("./public/pages/*")
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
-	routes.InitializeWebRoutes(r)
+	r.MaxMultipartMemory = 8 << 20 // 8 MiB
+
+	routes.NewApiRoutes(r)
+	routes.NewWebRoutes(r)
 
 	r.Run()
 }

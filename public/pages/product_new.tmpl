@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/dist/reset.css">
+  <link rel="stylesheet" href="/styles/dist/new_product.styles.css">
+  <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+  <title>Document</title>
+</head>
+
+<body>
+  {{template "header.tmpl"}}
+
+  <main class="container__main">
+    <header>
+      <h2>Adicionar Produto</h2>
+    </header>
+    <form>
+      <div>
+        <div class="form__col">
+          <label for="name">Nome do produto</label>
+          <input type="text" id="name" name="name" placeholder="Digite o nome do produto" />
+        </div>
+        <div class="form__col">
+          <label for="price">Preço</label>
+          <input type="number" id="price" name="price" placeholder="Digite o preço do produto" />
+        </div>
+      </div>
+      <div>
+        <div class="form__col">
+          <label for="image">Imagem de capa</label>
+          <input type="file" id="image" name="image" />
+        </div>
+        <div class="form__col">
+          <label for="quantity">Quantidade</label>
+          <input type="number" id="quantity" name="quantity" placeholder="Digite a Quantidade do produto" />
+        </div>
+      </div>
+
+      <div>
+        <div class="form__col">
+          <label for="description">Descrição</label>
+          <textarea id="description" name="description" placeholder="Descrição do produto"></textarea>
+        </div>
+      </div>
+
+      <footer>
+        <button>
+          Adicionar
+        </button>
+      </footer>
+    </form>
+  </main>
+
+  {{ template "footer.tmpl" }}
+
+  <script>
+    const form = document.querySelector("form");
+
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault()
+
+      const formData = new FormData(form)
+
+      await fetch("/products", {
+        method: "POST",
+        body: formData
+      })
+      form.reset()
+    })
+  </script>
+</body>
+
+</html>

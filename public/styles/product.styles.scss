@@ -1,0 +1,80 @@
+@import "./variables";
+
+.container__main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  max-width: 1200px;
+  width: 100%;
+  margin: 22px auto;
+
+  header nav {
+    ul {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      li a {
+        text-decoration: none;
+        color: $violet7;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      li {
+        color: $gray5;
+      }
+    }
+  }
+
+  section {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-top: 22px;
+
+    .product__image {
+      img {
+        width: 450px;
+        height: 450px;
+        object-fit: contain;
+      }
+    }
+
+    .product__details {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      header h3 {
+        color: $violet7;
+        font-size: 2rem;
+      }
+      div {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+
+        p {
+          color: $gray5;
+        }
+        span {
+          color: $violet6;
+        }
+      }
+
+      footer {
+        button {
+          background-color: $violet6;
+          color: $white;
+
+          padding: 8px 16px;
+          font-weight: bold;
+          border-radius: $radii;
+        }
+      }
+    }
+  }
+}

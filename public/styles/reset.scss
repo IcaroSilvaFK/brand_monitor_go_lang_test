@@ -1,0 +1,54 @@
+@import "./variables";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px $violet7;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+
+  font-size: 1rem;
+  background: $white;
+  color: $gray1;
+
+  display: flex;
+  flex-direction: column;
+}
+
+body,
+html,
+input,
+button,
+textarea {
+  font-family: $poppins;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  border: 0;
+  outline: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}

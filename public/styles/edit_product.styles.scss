@@ -1,0 +1,103 @@
+@import "./variables";
+
+.container__main {
+  flex: 1;
+
+  max-width: 1200px;
+  width: 100%;
+  margin: 22px auto;
+
+  header {
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      li {
+        color: $gray6;
+      }
+
+      li a {
+        color: $violet7;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    h3 {
+      margin-top: 12px;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+    gap: 12px;
+
+    > div {
+      display: flex;
+      gap: 40px;
+    }
+
+    .form__col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+
+      label {
+        font-weight: bold;
+      }
+
+      input {
+        border: 1px solid $gray6;
+        padding: 8px 4px;
+        border-radius: $radiiMd;
+        font-family: $poppins;
+
+        &[type="number"]::-webkit-outer-spin-button,
+        &[type="number"]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+
+      textarea {
+        resize: none;
+        height: 120px;
+        padding: 4px;
+        font-family: $poppins;
+        border-radius: $radii;
+        color: $gray1;
+        border: 1px solid $gray6;
+      }
+    }
+
+    .form__input_file {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      img {
+        max-width: 350px;
+        max-height: 100px;
+        object-fit: contain;
+      }
+    }
+
+    footer {
+      display: flex;
+      justify-content: flex-start;
+
+      button {
+        padding: 10px 26px;
+        background: $violet6;
+        color: $white;
+        font-weight: bold;
+        border-radius: $radii;
+      }
+    }
+  }
+}

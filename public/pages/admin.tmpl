@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/dist/reset.css">
+  <link rel="stylesheet" href="/styles/dist/admin.styles.css">
+  <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+  <title>BRANDSOTRE - Admin</title>
+</head>
+
+<body>
+  {{template "header.tmpl" }}
+
+  <main class="container__main">
+    <header class="main__header">
+      <h2>Produtos</h2>
+      <a href="/admin/products/new">
+        Adicionar
+      </a>
+    </header>
+
+    <section class="main__table">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Imagem</th>
+            <th>Nome</th>
+            <th>Valor</th>
+            <th>Estoque</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range .products }}
+          <tr>
+            <td>{{ .Quantity }}</td>
+            <td>
+              <img src={{ .ImageURL }} alt={{ .Name }}>
+            </td>
+            <td>
+              {{ .Name }}
+            </td>
+            <td id="price">
+              {{ .Price }}
+            </td>
+            <td>
+              {{ .Quantity }}
+            </td>
+            <td>
+              <div>
+                <button type="button" title="Deletar" onclick="deleteProduct('{{ .ID }}')">
+                  <i class="ph-fill ph-trash"></i>
+                </button>
+                <a type="button" title="Editar" href="admin/products/new/{{ .ID }}">
+                  <i class="ph-fill ph-pencil"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  {{ template "footer.tmpl" }}
+
+  <script>
+    async function deleteProduct(id) {
+
+      const response = await fetch(`/products/${id}`, {
+        method: "DELETE"
+      })
+      if (response.status === 204) {
+        location.reload()
+      }
+    }
+
+    function currencyFormat() {
+
+      const allPrices = document.querySelectorAll("#price");
+
+      allPrices.forEach(price => {
+        const parsedToInt = parseInt(price.textContent);
+        const formattedPrice = new Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        }).format(parsedToInt / 100)
+        price.innerHTML = formattedPrice
+      })
+    }
+
+    currencyFormat()
+  </script>
+
+</body>
+
+</html>

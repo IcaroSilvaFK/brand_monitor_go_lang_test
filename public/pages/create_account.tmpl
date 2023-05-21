@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/styles/dist/reset.css">
+  <link rel="stylesheet" href="/styles/dist/login.styles.css">
+  <title>BRANDSOTRE - Criar conta</title>
+</head>
+
+<body>
+
+  <main class="container__main">
+    <header>
+      <h1>Criar conta</h1>
+    </header>
+    <form onsubmit="onSubmit(event)" action="/users" method="GET">
+      <div class="form_col">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Digite seu email" required />
+      </div>
+      <div class="form_col">
+        <label for="username">Nome de usuário</label>
+        <input type="text" name="username" placeholder="Digite seu nome" required />
+      </div>
+      <div class="form_col">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Digite sua senha" required />
+      </div>
+      <button>
+        Criar conta
+      </button>
+    </form>
+    <a href="/">Voltar para login</a>
+  </main>
+  <script>
+    const form = document.querySelector("form")
+
+    async function onSubmit(event) {
+      event.preventDefault();
+
+      const email = form.elements["email"].value;
+      const username = form.elements["username"].value;
+      const password = form.elements["password"].value;
+
+      const response = await fetch("/users", {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+          username,
+          password
+        })
+      })
+
+      const data = await response.json()
+
+      localStorage.setItem("@user", JSON.stringify(data))
+      window.location.replace("/products")
+    }
+  </script>
+</body>
+
+</html>

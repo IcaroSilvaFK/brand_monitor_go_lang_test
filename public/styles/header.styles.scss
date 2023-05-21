@@ -1,0 +1,59 @@
+@import "./variables";
+
+.container__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  padding: 32px 0;
+
+  > a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    > div {
+      border-radius: $radiiFull;
+      background: $violet7;
+      padding: 6px;
+      color: $white;
+
+      display: flex;
+      align-items: center;
+      i {
+        font-size: 2rem;
+      }
+    }
+    img {
+      max-width: 100px;
+    }
+  }
+
+  nav ul {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    li {
+      cursor: pointer;
+      transition: color 0.3s linear;
+      :hover {
+        color: $violet7;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    gap: 22px;
+  }
+}

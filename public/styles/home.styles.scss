@@ -1,0 +1,132 @@
+@import "./variables";
+
+.card {
+  border-radius: $radii;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  max-width: 350px;
+  height: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+
+  .card__image {
+    flex: 1;
+  }
+
+  img {
+    width: 100%;
+    max-height: 145px;
+    object-fit: contain;
+  }
+
+  div {
+    margin-top: 4px;
+    strong {
+      font-size: 1.25rem;
+      color: $gray1;
+      padding: 4px 0;
+    }
+
+    > p {
+      font-size: 1rem;
+      color: $gray3;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  footer {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 6px;
+    a {
+      color: $violet7;
+      font-weight: 500;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: flex-start;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+.container__main {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+
+  .main__form {
+    margin-bottom: 22px;
+
+    form {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      input {
+        border: 1px solid $gray4;
+        padding: 8px 4px;
+        border-radius: $radii;
+        font-size: 1rem;
+        width: 350px;
+
+        &:active {
+          outline: 0;
+        }
+      }
+
+      button {
+        padding: 8px 16px;
+        border-radius: $radii;
+        &:first-of-type {
+          background: $violet7;
+          color: $white;
+
+          transition: background 0.3s linear;
+
+          &:hover {
+            background: $violet6;
+          }
+        }
+        &:last-of-type {
+          background: $gray7;
+
+          &:hover {
+            background: $gray6;
+          }
+        }
+      }
+
+      @media screen and (max-width: 500px) {
+        flex-direction: column;
+      }
+    }
+  }
+
+  .main__products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+    gap: 22px;
+
+    @media screen and (max-width: 500px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
